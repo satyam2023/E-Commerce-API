@@ -1,0 +1,11 @@
+###
+POST  http://localhost:5051/e-com/api/user/registerUser
+Content-Type: application/json
+
+{
+    "name":"Test",
+    "email":"Test234@gmail.com",
+    "phoneNumber":"9398339393",
+    "password":"Test@123",
+    "Role":1
+}
