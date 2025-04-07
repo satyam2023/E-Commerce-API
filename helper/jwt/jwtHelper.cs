@@ -1,11 +1,11 @@
+namespace ECommerce.Helper.JwtAuthCore;
+
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ECommerce.Helper.Jwt;
 using Microsoft.IdentityModel.Tokens;
-
-namespace ECommerce.Helper.Jwt;
 
 public static class AuthCore
 {
@@ -46,7 +46,7 @@ public static class AuthCore
         claims.AddClaim(new Claim(ClaimTypes.Name, user.Name));
         claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
         claims.AddClaim(new Claim(ClaimTypes.Role, user.Role.ToString()));
-        claims.AddClaim(new Claim(ClaimTypes.Email, user.Name));
+        claims.AddClaim(new Claim(ClaimTypes.Email, user.Email));
         return claims;
     }
 }

@@ -142,3 +142,4 @@
 /Users/satyamsingh/Documents/DotNet/ECommerce/ECommerce/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/satyamsingh/Documents/DotNet/ECommerce/ECommerce/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
 /Users/satyamsingh/Documents/DotNet/ECommerce/ECommerce/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/satyamsingh/Documents/DotNet/ECommerce/ECommerce/obj/Debug/net9.0/ECommerce.sourcelink.json

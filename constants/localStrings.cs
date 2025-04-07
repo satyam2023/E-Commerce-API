@@ -20,5 +20,9 @@ namespace ECommerce.Constants.LocalString
         public const string userDeleted = "User Deleted Successfully";
 
         public const string userUpdatedSuccessfully = "User Updated Successfully";
+
+        public const string invalidRefreshToken = "Invalid Refresh Token";
+
+        public const string newAccessToken = "New Access Token";
     }
 }

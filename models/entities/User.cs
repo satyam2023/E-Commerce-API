@@ -25,4 +25,6 @@ public class User
 
     [Required]
     public UserRole Role { get; set; }
+
+    public required string RefreshToken { get; set; }
 }

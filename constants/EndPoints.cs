@@ -9,4 +9,6 @@ public static class AppEndPoints
     public const string deleteUser = "deleteUser";
 
     public const string updateUser = "updateUser";
+
+    public const string refreshToken = "refreshToken";
 }
