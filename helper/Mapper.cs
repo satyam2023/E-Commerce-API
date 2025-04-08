@@ -9,5 +9,7 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<CreateUser, User>();
         CreateMap<User, UserResponse>();
+        CreateMap<CreateAddress, Address>();
+        CreateMap<Address, AddressResponse>();
     }
 }

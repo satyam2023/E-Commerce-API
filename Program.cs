@@ -56,6 +56,7 @@ builder
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IAddressServices, AddressService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // builder.Services.AddSwaggerGen();

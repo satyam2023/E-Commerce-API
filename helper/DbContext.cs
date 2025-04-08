@@ -20,6 +20,16 @@ namespace ECommerce.Data
             );
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasMany(u => u.Addresses)
+                .WithOne(a => a.User)
+                .HasForeignKey(a => a.UserId);
+        }
+
         public DbSet<User> User { get; set; }
+        public DbSet<Address> Address { get; set; }
     }
 }

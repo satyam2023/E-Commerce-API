@@ -1,4 +1,3 @@
-
 namespace ECommerce.MiddleWare
 {
     using System.Globalization;
@@ -7,14 +6,14 @@ namespace ECommerce.MiddleWare
 
     public class AppException : Exception
     {
-        public AppException() : base() { }
+        public AppException()
+            : base() { }
 
-        public AppException(string message) : base(message) { }
+        public AppException(string message)
+            : base(message) { }
 
         public AppException(string message, params object[] args)
-            : base(String.Format(CultureInfo.CurrentCulture, message, args))
-        {
-        }
+            : base(String.Format(CultureInfo.CurrentCulture, message, args)) { }
     }
 
     public class ErrorHandlerMiddleWare
@@ -59,7 +58,5 @@ namespace ECommerce.MiddleWare
                 await response.WriteAsync(result);
             }
         }
-
-
     }
 }

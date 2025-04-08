@@ -11,4 +11,10 @@ public static class AppEndPoints
     public const string updateUser = "updateUser";
 
     public const string refreshToken = "refreshToken";
+
+    public const string address = $"{mainUrl}/address";
+
+    public const string addAddress = "addAddress";
+    public const string getAddressByUserId = "getAddressByUserId";
+    public const string deleteAddress = "deleteAddress";
 }

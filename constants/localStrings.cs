@@ -24,5 +24,19 @@ namespace ECommerce.Constants.LocalString
         public const string invalidRefreshToken = "Invalid Refresh Token";
 
         public const string newAccessToken = "New Access Token";
+        public const string addressLine1Required = "Address Line 1 is required.";
+        public const string addressLine1Length = "Address Line 1 cannot exceed 100 characters.";
+        public const string addressLine2Length = "Address Line 2 cannot exceed 100 characters.";
+        public const string cityRequired = "City is required.";
+        public const string cityLength = "City cannot exceed 50 characters.";
+        public const string stateRequired = "State is required.";
+        public const string stateLength = "State cannot exceed 50 characters.";
+        public const string postalCodeRequired = "Postal Code is required.";
+        public const string countryRequired = "Country is required.";
+        public const string countryLength = "Country cannot exceed 50 characters.";
+        public const string addressAdded = "Address added successfully.";
+        public const string addressFetched = "Address fetched successfully.";
+        public const string addressNotFound = "Address not found.";
+        public const string addressDeleted = "Address deleted successfully.";
     }
 }

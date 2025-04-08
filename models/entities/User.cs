@@ -27,4 +27,6 @@ public class User
     public UserRole Role { get; set; }
 
     public required string RefreshToken { get; set; }
+
+    public ICollection<Address>? Addresses { get; set; }
 }
