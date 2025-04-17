@@ -38,5 +38,13 @@ namespace ECommerce.Constants.LocalString
         public const string addressFetched = "Address fetched successfully.";
         public const string addressNotFound = "Address not found.";
         public const string addressDeleted = "Address deleted successfully.";
+        public const string categoryNameRequired = "Category name is required.";
+        public const string categoryNameLength = "Category name cannot exceed 100 characters.";
+        public const string imageUrlRequired = "Image URL is required.";
+        public const string invalidUrlFormat = "Invalid URL format.";
+        public const string descriptionRequired = "Description is required.";
+        public const string descriptionLength = "Description cannot exceed 500 characters.";
+        public const string categoryAlreadyExist = "Category name Already Exist";
+        public const string categoryCreated = "Category Created Successfully";
     }
 }

@@ -17,4 +17,11 @@ public static class AppEndPoints
     public const string addAddress = "addAddress";
     public const string getAddressByUserId = "getAddressByUserId";
     public const string deleteAddress = "deleteAddress";
+
+    public const string category = $"{mainUrl}/category";
+    public const string createCategory = "createCategory";
+    public const string deleteCategory = "deleteCategory";
+
+    public const string updateCategory = "updateCategory";
+    public const string getAllCategory = "getAllCategory";
 }

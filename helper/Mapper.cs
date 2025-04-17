@@ -11,5 +11,7 @@ public class AutoMapperProfile : Profile
         CreateMap<User, UserResponse>();
         CreateMap<CreateAddress, Address>();
         CreateMap<Address, AddressResponse>();
+        CreateMap<Category, CategoryDetails>();
+        CreateMap<CreateCategory, Category>();
     }
 }

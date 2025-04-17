@@ -27,9 +27,18 @@ namespace ECommerce.Data
                 .HasMany(u => u.Addresses)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId);
+
+            modelBuilder
+                .Entity<Category>()
+                .Property<DateTime>("CreatedAt")
+                .HasColumnType("timestamp")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<User> User { get; set; }
         public DbSet<Address> Address { get; set; }
+
+        public DbSet<Category> Category { get; set; }
     }
 }
