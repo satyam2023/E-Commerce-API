@@ -13,13 +13,13 @@ namespace ECommerce.MiddleWare
             : base(message) { }
 
         public AppException(string message, params object[] args)
-            : base(String.Format(CultureInfo.CurrentCulture, message, args)) { }
+            : base(string.Format(CultureInfo.CurrentCulture, message, args)) { }
     }
 
     public class ErrorHandlerMiddleWare
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
+        private readonly ILogger<ErrorHandlerMiddleWare> _logger;
 
         public ErrorHandlerMiddleWare(RequestDelegate next, ILogger<ErrorHandlerMiddleWare> logger)
         {
@@ -37,26 +37,37 @@ namespace ECommerce.MiddleWare
             {
                 var response = context.Response;
                 response.ContentType = "application/json";
+
                 switch (error)
                 {
-                    case AppException e:
-
+                    case AppException:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
-                    case KeyNotFoundException e:
 
+                    case KeyNotFoundException:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
-                    default:
 
-                        _logger.LogError(error, error.Message);
+                    default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        _logger.LogError(error, error.Message);
                         break;
                 }
 
-                var result = JsonSerializer.Serialize(new { message = error?.Message });
+                var result = JsonSerializer.Serialize(
+                    new { message = GetInnermostExceptionMessage(error) }
+                );
+
                 await response.WriteAsync(result);
             }
+        }
+
+        private static string GetInnermostExceptionMessage(Exception ex)
+        {
+            while (ex.InnerException != null)
+                ex = ex.InnerException;
+
+            return ex.Message;
         }
     }
 }

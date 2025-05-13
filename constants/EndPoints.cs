@@ -24,4 +24,8 @@ public static class AppEndPoints
 
     public const string updateCategory = "updateCategory";
     public const string getAllCategory = "getAllCategory";
+    public const string product = $"{mainUrl}/product";
+
+    public const string getProductList = "getProducts";
+    public const string createProduct = "createProduct";
 }

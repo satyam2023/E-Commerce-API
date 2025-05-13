@@ -13,5 +13,7 @@ public class AutoMapperProfile : Profile
         CreateMap<Address, AddressResponse>();
         CreateMap<Category, CategoryDetails>();
         CreateMap<CreateCategory, Category>();
+        CreateMap<Product, ProductDetail>().ReverseMap();
+        CreateMap<Product, CreateProducts>().ReverseMap();
     }
 }

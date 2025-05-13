@@ -40,6 +40,17 @@ public static class AuthCore
         return Convert.ToBase64String(randomBytes);
     }
 
+    public static string ExtractUserNameFromToken(string token)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(token);
+        var email = jwtToken
+            ?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email || c.Type == "email")
+            ?.Value;
+
+        return email ?? "";
+    }
+
     private static ClaimsIdentity GenerateClaims(User user)
     {
         var claims = new ClaimsIdentity();

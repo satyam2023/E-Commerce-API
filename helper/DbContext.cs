@@ -40,5 +40,7 @@ namespace ECommerce.Data
         public DbSet<Address> Address { get; set; }
 
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<Product> Product { get; set; }
     }
 }

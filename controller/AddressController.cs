@@ -1,6 +1,5 @@
 using ECommerce.Constants.AppEndPoint;
 using ECommerceApp.ApiResponse;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]

@@ -46,5 +46,22 @@ namespace ECommerce.Constants.LocalString
         public const string descriptionLength = "Description cannot exceed 500 characters.";
         public const string categoryAlreadyExist = "Category name Already Exist";
         public const string categoryCreated = "Category Created Successfully";
+        public const string productFetchSuccess = "Products fetched successfully";
+        public const string categoryIdNotExist = "Provided Category Id does not exist.";
+        public const string productCreatedSuccessfully = "Product created successfully.";
+        public const string productNameReq = "Product name is required.";
+        public const string productNameErrorMsg = "Product name cannot exceed 100 characters.";
+        public const string productPriceReq = "Price is required.";
+        public const string priceErrors = "Price must be greater than 0.";
+
+        public const string avlStockReq = "Available stock is required.";
+        public const string avlStockMsg = "Available stock cannot be negative.";
+        public const string productImgMsg = "At least one product image is required.";
+        public const string productDescReq = "Description is required.";
+        public const string productDescMsg = "Description cannot exceed 500 characters.";
+        public const string productDiscountError = "Discount must be between 0 and 100.";
+        public const string categoryIdReq = "CategoryId is required.";
+        public const string createdByReq = "CreatedBy is required.";
+        public const string createdByErrorMsg = "CreatedBy cannot exceed 50 characters.";
     }
 }
