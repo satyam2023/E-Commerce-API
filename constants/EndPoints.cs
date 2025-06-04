@@ -28,4 +28,11 @@ public static class AppEndPoints
 
     public const string getProductList = "getProducts";
     public const string createProduct = "createProduct";
+
+    public const string getProductByPage="getProductByPage";
+
+    public const string order = $"{mainUrl}/order";
+
+    public const string createOrder = "createOrder";
+
 }

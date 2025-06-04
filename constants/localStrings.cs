@@ -63,5 +63,9 @@ namespace ECommerce.Constants.LocalString
         public const string categoryIdReq = "CategoryId is required.";
         public const string createdByReq = "CreatedBy is required.";
         public const string createdByErrorMsg = "CreatedBy cannot exceed 50 characters.";
+        public const string totalAmtMoreThanZero = "TotalAmount must be greater than 0";
+        public const string orderPlacedSuccess = "Order Placed Successfully";
+        public const string itemRequired = "Order Items Required";
+        public const string outOfStock = "Select product(s) is unavailable";
     }
 }

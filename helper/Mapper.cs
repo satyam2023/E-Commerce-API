@@ -15,5 +15,10 @@ public class AutoMapperProfile : Profile
         CreateMap<CreateCategory, Category>();
         CreateMap<Product, ProductDetail>().ReverseMap();
         CreateMap<Product, CreateProducts>().ReverseMap();
+        CreateMap<Order, OrderDetail>().ReverseMap();
+        CreateMap<Order, CreateOrder>().ReverseMap();
+        CreateMap<CreateOrderItem, OrderItem>()
+            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow))
+            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow));
     }
 }

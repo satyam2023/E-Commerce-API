@@ -32,6 +32,7 @@ public class UserServices : IUserServices
 
     public async Task<ApiResponse<UserResponse>> registerUser(CreateUser user)
     {
+
         bool isUserAlreadyExist = _context.User.Any(c =>
             c.Email == user.Email || c.PhoneNumber == user.PhoneNumber
         );

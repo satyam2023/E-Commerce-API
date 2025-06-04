@@ -25,8 +25,8 @@ public class AddressService : IAddressServices
 
     public async Task<ApiResponse<AddressResponse>> addAddress(CreateAddress address)
     {
-        var user = await _context.User.FirstOrDefaultAsync(c => c.Id == address.UserId);
-        if (user == null)
+        var user = await _context.User.AnyAsync(c => c.Id == address.UserId);
+        if (!user)
         {
             return new ApiResponse<AddressResponse>(
                 AppStatusCode.NotFound,
@@ -55,8 +55,10 @@ public class AddressService : IAddressServices
                 LocalString.userNotFound
             );
         }
-        var addressList = _context.Address.Where(a => a.UserId == userId);
-
+        var addressList = await _context
+            .Address.Where(a => a.UserId == userId)
+            .AsNoTracking()
+            .ToListAsync();
         var addressResponseList = _mapper.Map<List<AddressResponse>>(addressList.ToList());
         return new ApiResponse<List<AddressResponse>>(
             AppStatusCode.Created,

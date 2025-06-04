@@ -36,4 +36,8 @@ public class Product
 
     [Required(ErrorMessage = LocalString.categoryIdReq)]
     public required int CategoryId { get; set; }
+
+    [Timestamp]
+    [ConcurrencyCheck]
+    public required byte[] RowVersion { get; set; }
 }

@@ -28,11 +28,17 @@ public class ProductController : ControllerBase
         [FromHeader(Name = "Authorization")] string authorizationHeader
     )
     {
-        Console.WriteLine(authorizationHeader);
         ApiResponse<Product> response = await _productService.createProduct(
             product,
             authorizationHeader.Substring(7)
         );
+        return StatusCode((int)response.StatusCode, response);
+    }
+
+    [HttpGet(AppEndPoints.getProductByPage)]
+    public async Task<IActionResult> GetProductByPage(int page)
+    {
+        ApiResponse<List<ProductDetail>> response = await _productService.getProductByPage(page);
         return StatusCode((int)response.StatusCode, response);
     }
 }

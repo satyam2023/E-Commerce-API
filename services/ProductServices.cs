@@ -10,6 +10,8 @@ public interface IProductServices
 {
     public Task<ApiResponse<List<ProductDetail>>> getProductList();
     public Task<ApiResponse<Product>> createProduct(CreateProducts product, string token);
+
+    public Task<ApiResponse<List<ProductDetail>>> getProductByPage(int page);
 }
 
 public class ProductServices : IProductServices
@@ -56,6 +58,26 @@ public class ProductServices : IProductServices
             AppStatusCode.Created,
             productEntity,
             LocalString.productCreatedSuccessfully
+        );
+    }
+
+    public async Task<ApiResponse<List<ProductDetail>>> getProductByPage(int page)
+    {
+        int pageSize = 2;
+        var skip = (page - 1) * pageSize;
+
+        var products = await _context
+            .Product.AsNoTracking()
+            .Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+
+        List<ProductDetail> productDetail = _mapper.Map<List<ProductDetail>>(products);
+
+        return new ApiResponse<List<ProductDetail>>(
+            AppStatusCode.Success,
+            productDetail,
+            LocalString.productFetchSuccess
         );
     }
 }
