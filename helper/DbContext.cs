@@ -20,6 +20,37 @@ namespace ECommerce.Data
             );
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasMany(u => u.Addresses)
+                .WithOne(a => a.User)
+                .HasForeignKey(a => a.UserId);
+
+            modelBuilder
+                .Entity<Category>()
+                .Property<DateTime>("CreatedAt")
+                .HasColumnType("timestamp")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .ValueGeneratedOnAdd();
+
+            modelBuilder
+                .Entity<Order>()
+                .Property<DateTime>("CreatedAt")
+                .HasColumnType("timestamp")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .ValueGeneratedOnAdd();
+        }
+
         public DbSet<User> User { get; set; }
+        public DbSet<Address> Address { get; set; }
+
+        public DbSet<Category> Category { get; set; }
+
+        public DbSet<Product> Product { get; set; }
+
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
     }
 }

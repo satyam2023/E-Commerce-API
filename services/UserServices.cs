@@ -3,9 +3,9 @@ using BCrypt.Net;
 using ECommerce.Constants.AppStatusCode;
 using ECommerce.Constants.LocalString;
 using ECommerce.Data;
+using ECommerce.Helper.JwtAuthCore;
 using ECommerce.Models.Dtos.User;
 using ECommerceApp.ApiResponse;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 
 public interface IUserServices
@@ -15,6 +15,8 @@ public interface IUserServices
     Task<ApiResponse<string>> deleteUser(int userId);
 
     Task<ApiResponse<UserResponse>> updateUser(UpdateUser user, int userId);
+
+    Task<ApiResponse<UserTokenResponse>> refreshToken(RefreshTokenRequest token);
 }
 
 public class UserServices : IUserServices
@@ -30,6 +32,7 @@ public class UserServices : IUserServices
 
     public async Task<ApiResponse<UserResponse>> registerUser(CreateUser user)
     {
+
         bool isUserAlreadyExist = _context.User.Any(c =>
             c.Email == user.Email || c.PhoneNumber == user.PhoneNumber
         );
@@ -42,10 +45,14 @@ public class UserServices : IUserServices
 
         var dbUser = _mapper.Map<User>(user);
         dbUser.Password = BCrypt.Net.BCrypt.HashPassword(dbUser.Password);
+        var refreshToken = AuthCore.GenerateRefreshToken();
+        var accessToken = AuthCore.GenerateAccessToken(dbUser);
+        dbUser.RefreshToken = refreshToken;
         _context.Add(dbUser);
         await _context.SaveChangesAsync();
 
         var createdUser = _mapper.Map<UserResponse>(dbUser);
+        createdUser.AccessToken = accessToken;
 
         return new ApiResponse<UserResponse>(
             AppStatusCode.Created,
@@ -70,8 +77,11 @@ public class UserServices : IUserServices
                 LocalString.incorrectPassword
             );
         }
+        var refreshToken = AuthCore.GenerateRefreshToken();
+        var accessToken = AuthCore.GenerateAccessToken(userDetail);
 
         var userData = _mapper.Map<UserResponse>(userDetail);
+        userData.AccessToken = accessToken;
 
         return new ApiResponse<UserResponse>(
             AppStatusCode.Success,
@@ -113,6 +123,28 @@ public class UserServices : IUserServices
             AppStatusCode.Success,
             updatedUser,
             LocalString.userUpdatedSuccessfully
+        );
+    }
+
+    public async Task<ApiResponse<UserTokenResponse>> refreshToken(RefreshTokenRequest token)
+    {
+        var user = await _context.User.FirstOrDefaultAsync(u =>
+            u.RefreshToken == token.RefreshToken
+        );
+        if (user == null)
+        {
+            return new ApiResponse<UserTokenResponse>(
+                AppStatusCode.NotFound,
+                LocalString.invalidRefreshToken
+            );
+        }
+        var accessToken = AuthCore.GenerateAccessToken(user);
+
+        var response = new UserTokenResponse { AccessToken = accessToken };
+        return new ApiResponse<UserTokenResponse>(
+            AppStatusCode.Success,
+            response,
+            LocalString.newAccessToken
         );
     }
 }

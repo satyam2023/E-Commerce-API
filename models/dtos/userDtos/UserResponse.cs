@@ -17,5 +17,8 @@ namespace ECommerce.Models.Dtos.User
         [Required(ErrorMessage = LocalString.phoneRequired)]
         [RegularExpression(RegexExp.PHONE_REGEX, ErrorMessage = LocalString.invalidPhoneFormat)]
         public required string PhoneNumber { get; set; }
+
+        public string? RefreshToken { get; set; }
+        public string? AccessToken { get; set; }
     }
 }

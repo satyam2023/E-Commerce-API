@@ -1,11 +1,11 @@
+namespace ECommerce.Helper.JwtAuthCore;
+
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ECommerce.Helper.Jwt;
 using Microsoft.IdentityModel.Tokens;
-
-namespace ECommerce.Helper.Jwt;
 
 public static class AuthCore
 {
@@ -40,13 +40,24 @@ public static class AuthCore
         return Convert.ToBase64String(randomBytes);
     }
 
+    public static string ExtractUserNameFromToken(string token)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(token);
+        var email = jwtToken
+            ?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email || c.Type == "email")
+            ?.Value;
+
+        return email ?? "";
+    }
+
     private static ClaimsIdentity GenerateClaims(User user)
     {
         var claims = new ClaimsIdentity();
         claims.AddClaim(new Claim(ClaimTypes.Name, user.Name));
         claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
         claims.AddClaim(new Claim(ClaimTypes.Role, user.Role.ToString()));
-        claims.AddClaim(new Claim(ClaimTypes.Email, user.Name));
+        claims.AddClaim(new Claim(ClaimTypes.Email, user.Email));
         return claims;
     }
 }
